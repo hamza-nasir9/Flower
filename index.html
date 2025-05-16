@@ -277,45 +277,58 @@
         border: 1px solid var(--rose-gold-light);
     }
 
-  h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
-  font-family: 'Cursive', 'Segoe UI', sans-serif;
- background: linear-gradient(90deg, #ff0844, #ffb199);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  position: relative;
-  animation: glow 2s ease-in-out infinite alternate;
-}
+    h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+        font-family: 'Cursive', 'Segoe UI', sans-serif;
+        background: linear-gradient(90deg, #ff0844, #ffb199);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        text-transform: uppercase;
+        position: relative;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
 
-@keyframes glow {
-  0% {
-    text-shadow: 0 0 5px #ff99cc, 0 0 10px #ff0844, 0 0 15px  #ff9a9e,;
-  }
-  100% {
-    text-shadow: 0 0 10px #ffcce6, 0 0 20px #ff9a9e, 0 0 30px  #fad0c4;
-  }
-}
+    @keyframes glow {
+        0% {
+            text-shadow: 0 0 5px #ff99cc, 0 0 10px #ff0844, 0 0 15px #ff9a9e, ;
+        }
 
-/* Optional: Sparkle Stars (using pseudo-element) */
-h1::after {
-  content: '✨';
-  position: absolute;
-  animation: sparkleMove 2s linear infinite;
-  font-size: 1.5rem;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-}
+        100% {
+            text-shadow: 0 0 10px #ffcce6, 0 0 20px #ff9a9e, 0 0 30px #fad0c4;
+        }
+    }
 
-@keyframes sparkleMove {
-  0% { top: -10px; opacity: 1; }
-  50% { top: 10px; opacity: 0.5; }
-  100% { top: -10px; opacity: 1; }
-}
+    /* Optional: Sparkle Stars (using pseudo-element) */
+    h1::after {
+        content: '✨';
+        position: absolute;
+        animation: sparkleMove 2s linear infinite;
+        font-size: 1.5rem;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @keyframes sparkleMove {
+        0% {
+            top: -10px;
+            opacity: 1;
+        }
+
+        50% {
+            top: 10px;
+            opacity: 0.5;
+        }
+
+        100% {
+            top: -10px;
+            opacity: 1;
+        }
+    }
 </style>
 
 <body>
