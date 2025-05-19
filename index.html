@@ -313,37 +313,120 @@
         transform: translateX(-50%);
     }
 
-.message-container {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 24px;
-  color: #fff;
-  text-align: center;
-  opacity: 0;
-  animation: fadeIn 2s ease-in forwards;
-}
+    /* Base Setup */
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
 
-#message {
-  font-size: 28px;
-  font-weight: bold;
-  color: #FF69B4;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  animation: typeWriter 10s steps(60) 1s forwards;
-}
+    /* Sparkle Background */
+    .sparkle-background::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://i.imgur.com/m2QwZeE.gif');
+        background-size: cover;
+        opacity: 0.3;
+        pointer-events: none;
+        z-index: 1;
+    }
 
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
+    /* Message Box */
+    .message-container {
+        background-color: #fff0fa;
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+        max-width: 600px;
+        text-align: center;
+        opacity: 0;
+        animation: fadeIn 2s ease-in-out forwards;
+        z-index: 2;
+        position: relative;
+    }
 
-@keyframes typeWriter {
-  0% { width: 0; }
-  100% { width: 100%; }
-}
+    /* Typing Text */
+    #message {
+        font-size: 20px;
+        font-weight: 600;
+        color: #FF1493;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        border-right: 2px solid #FF69B4;
+        width: 500px;
+    }
+
+
+
+    .sparkle-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .sparkle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: radial-gradient(circle, #fff, #ffc0cb, transparent);
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: fall linear forwards;
+    }
+    .sparkle::before{
+        position: absolute;
+        content: "🌹";
+        z-index: 10;
+        top: 10px;
+        left: 120px;
+    }
+    .sparkle::after{
+        position: absolute;
+        content: "💖";
+        z-index: 10;
+        bottom: 130px;
+        right: 150px;
+    }
+    section{
+        display: flex;
+        align-items:center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        100% {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+    }
+
+    /* Fade-in Animation */
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+
+
 
     @keyframes sparkleMove {
         0% {
@@ -365,12 +448,13 @@
 
 <body>
 
-
-   <div class="message-container">
-     <h1>Da Zra Malka💖🌹</h1>
-    <p id="message" >Every moment with you feels like a beautiful dream. Your smile lights up my world, and your presence fills my
-        heart with warmth. You are the queen of my heart, and always will be. 💖💎</p>
-   </div>
+    <h1>Da Zra Malka💖🌹</h1>
+    <div class="sparkle-container"></div>
+    <!-- Message Container -->
+   <section>
+     <div class="message-container">
+        <p id="message"></p>
+    </div>
 
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <svg class="rose" width="271.17" height="656.57" version="1.1" viewBox="0 0 71.747 173.72" id="svg109"
@@ -534,6 +618,8 @@
         <path fill="url(#rose-a)" stroke-width=".02" d="M0 0h800v200H0z"
             transform="matrix(0 .15801 -.21884 0 227.37 -40.344)" id="path107" />
     </svg>
+   </section>
+
 
     <div id="tooltip"></div>
     <script>
@@ -555,26 +641,55 @@
                 }, 100);
             }, 2000);
         });
-        const messageText = `Da Zra Malka,  
-Every moment with you feels like a beautiful dream. Your smile lights up my world, and your presence fills my heart with warmth. You are the queen of my heart, and always will be. 💖`;
 
-        function animateMessage() {
-            const messageElem = document.getElementById('message');
-            let index = 0;
+        const message = `Da Zra Malka,
 
-            function typeWriter() {
-                if (index < messageText.length) {
-                    messageElem.innerHTML += messageText.charAt(index);
-                    index++;
-                    setTimeout(typeWriter, 50);  // Speed of the typewriter effect
-                }
+        Har lamha che sta sara tir shi, zama pa nazar ke hagha yaw khwandnak khwab de.  
+        Sta muskara zama dunya roshanawi, ao sta wujud zama zra ta sukoon ao rohaniyat warkawi.  
+        Ta zama da zra malka ye, ao hamesha ba ye. 💖💎`;
+
+        const messageElement = document.getElementById("message");
+        let index = 0;
+
+        function typeWriter() {
+            if (index < message.length) {
+                messageElement.innerHTML += message.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50); // Typing speed
             }
-
-            setTimeout(typeWriter, 500); // Delay before starting the animation
         }
 
-        // Trigger the message animation after page load
-        window.onload = animateMessage;
+        window.onload = () => {
+            setTimeout(typeWriter, 1000); // Start delay
+        };
+
+
+
+        const container = document.querySelector('.sparkle-container');
+
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+
+            // Random horizontal position
+            sparkle.style.left = `${Math.random() * 100}%`;
+            sparkle.style.top = `-10px`;
+
+            // Random animation duration
+            const duration = 3 + Math.random() * 3;
+            sparkle.style.animationDuration = `${duration}s`;
+
+            container.appendChild(sparkle);
+
+            // Remove sparkle after it finishes
+            setTimeout(() => {
+                sparkle.remove();
+            }, duration * 1000);
+        }
+
+        // Create sparkles continuously
+        setInterval(createSparkle, 150);
+
 
     </script>
 </body>
